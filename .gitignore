@@ -1,3 +1,7 @@
 # Project exclude paths
 /out/
 /src/net/minecraft/client/main/Main.java
+/expensive
+/baritone
+/assets
+/logs

@@ -275,7 +275,6 @@ public class IngameGui extends AbstractGui {
             this.func_238455_c_(matrixStack);
         }
         MainWindow mainWindow = mc.getMainWindow();
-        System.out.println(mc.getMainWindow().getLimitFramerate());
         mc.gameRenderer.setupOverlayRendering(2);
 
         EventManager.call(new EventRender(partialTicks, matrixStack, mainWindow, EventRender.Type.RENDER2D, null));

@@ -33,6 +33,7 @@ public class FunctionManager {
 
     public final NoSlowFunction noSlowFunction;
     public final AuraFunction auraFunction;
+    public final ClientSetting clientSetting;
     public final NoServerRotFunction noServerRotFunction;
     public final FastBreakFunction fastBreakFunction;
     public final XRayFunction xRayFunction;
@@ -67,6 +68,7 @@ public class FunctionManager {
                 this.arrowsFunction = new ArrowsFunction(),
                 this.fullBrightFunction = new FullBrightFunction(),
                 this.noRenderFunction = new NoRenderFunction(),
+                this.clientSetting = new ClientSetting(),
                 this.sprintFunction = new SprintFunction(),
                 this.flightFunction = new FlightFunction(),
                 this.strafeFunction = new StrafeFunction(),

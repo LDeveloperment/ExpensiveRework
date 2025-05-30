@@ -119,7 +119,7 @@ public class AuraFunction extends Function {
     public void onEvent(final Event event) {
         if (event instanceof EventInteractEntity entity) {
             if (target != null)
-                entity.setCancel(true);
+                entity.setCancel(!Managment.FUNCTION_MANAGER.clientSetting.fixinteract.get());
         }
         if (event instanceof EventInput eventInput) {
             if (settings.get(1) && silent.get()) {
@@ -273,7 +273,7 @@ public class AuraFunction extends Function {
         }
 
         boolean sprint = false;
-        if (CEntityActionPacket.lastUpdatedSprint && !mc.player.isInWater()) {
+        if (CEntityActionPacket.lastUpdatedSprint && !mc.player.isInWater() && Managment.FUNCTION_MANAGER.clientSetting.sprint.is("Пакетный")) {
             mc.player.connection.sendPacket(new CEntityActionPacket(mc.player, CEntityActionPacket.Action.STOP_SPRINTING));
             sprint = true;
         }

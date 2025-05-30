@@ -9,6 +9,9 @@ import wtf.expensive.util.ClientUtil;
 @FunctionAnnotation(name = "DiscordRPC", type = Type.Util)
 public class DiscordRPC extends Function {
 
+    public DiscordRPC() {
+        toggle();
+    }
     @Override
     protected void onDisable() {
         super.onDisable();

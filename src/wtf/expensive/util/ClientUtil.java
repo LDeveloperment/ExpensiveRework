@@ -51,7 +51,7 @@ public class ClientUtil implements IMinecraft {
         }
     }
 
-    static IPCClient client = new IPCClient(1154433483247198319L);
+    static IPCClient client = new IPCClient(1378052615601918045L);
 
     public static void startRPC() {
 
@@ -65,7 +65,7 @@ public class ClientUtil implements IMinecraft {
             public void onReady(IPCClient client)
             {
                 RichPresence.Builder builder = new RichPresence.Builder();
-                builder.setDetails("ver: 2.0")
+                builder.setDetails("ver: 1.0")
                         .setStartTimestamp(OffsetDateTime.now())
                         .setLargeImage("yctne3opcfc", "always on top");
                 client.sendRichPresence(builder.build());
@@ -110,7 +110,7 @@ public class ClientUtil implements IMinecraft {
     }
     public static void sendMesage(String message) {
         if (mc.player == null) return;
-        mc.player.sendMessage(gradient("Expensive Client", new java.awt.Color(90, 105, 255).getRGB(), new java.awt.Color(245, 98, 255).getRGB()).append(new StringTextComponent(TextFormatting.DARK_GRAY + " -> " + TextFormatting.RESET + message)), Util.DUMMY_UUID);
+        mc.player.sendMessage(gradient("ExpensiveRework", new java.awt.Color(90, 105, 255).getRGB(), new java.awt.Color(245, 98, 255).getRGB()).append(new StringTextComponent(TextFormatting.DARK_GRAY + " -> " + TextFormatting.RESET + message)), Util.DUMMY_UUID);
     }
 
     public static StringTextComponent gradient(String message, int first, int end) {
