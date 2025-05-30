@@ -57,44 +57,44 @@ import static wtf.expensive.util.math.MathUtil.calculateDelta;
 
 @FunctionAnnotation(name = "Aura", type = Type.Combat)
 public class AuraNew extends Function {
-    private final ModeSetting mode = new ModeSetting("Ðåæèì ðîòàöèè",
-            "Ñíàïû",
-            "Îáû÷íàÿ", "Ñíàïû"
+    private final ModeSetting mode = new ModeSetting("Ð ÐµÐ¶Ð¸Ð¼ Ñ€Ð¾Ñ‚Ð°Ñ†Ð¸Ð¸",
+            "Ð¡Ð½Ð°Ð¿Ñ‹",
+            "ÐžÐ±Ñ‹Ñ‡Ð½Ð°Ñ", "Ð¡Ð½Ð°Ð¿Ñ‹"
     );
-    private final SliderSetting range = new SliderSetting("Äèñòàíöèÿ", 3, 3, 6, 0.05f);
+    private final SliderSetting range = new SliderSetting("Ð”Ð¸ÑÑ‚Ð°Ð½Ñ†Ð¸Ñ", 3, 3, 6, 0.05f);
 
-    private final SliderSetting preRange = new SliderSetting("Äèñòàíöèÿ ðîòàöèè", 0.5f, 0.0f, 3.0f, 0.05f)
-            .setVisible(() -> mode.is("Îáû÷íàÿ"));
+    private final SliderSetting preRange = new SliderSetting("Ð”Ð¸ÑÑ‚Ð°Ð½Ñ†Ð¸Ñ Ñ€Ð¾Ñ‚Ð°Ñ†Ð¸Ð¸", 0.5f, 0.0f, 3.0f, 0.05f)
+            .setVisible(() -> mode.is("ÐžÐ±Ñ‹Ñ‡Ð½Ð°Ñ"));
 
 
-    private final MultiBoxSetting targets = new MultiBoxSetting("Öåëè",
-            new BooleanOption("Èãðîêè", true),
-            new BooleanOption("Æèâîòíûå", false),
-            new BooleanOption("Ìîíñòðû", false)
-    );
-
-    private final MultiBoxSetting ignore = new MultiBoxSetting("Èãíîðèðîâàòü",
-            new BooleanOption("Äðóçåé", true),
-            new BooleanOption("Íåâèäèìûõ", false),
-            new BooleanOption("Ãîëûõ", false),
-            new BooleanOption("Áîòîâ", true)
+    private final MultiBoxSetting targets = new MultiBoxSetting("Ð¦ÐµÐ»Ð¸",
+            new BooleanOption("Ð˜Ð³Ñ€Ð¾ÐºÐ¸", true),
+            new BooleanOption("Ð–Ð¸Ð²Ð¾Ñ‚Ð½Ñ‹Ðµ", false),
+            new BooleanOption("ÐœÐ¾Ð½ÑÑ‚Ñ€Ñ‹", false)
     );
 
-    private final ModeSetting sort = new ModeSetting("Ñîðòèðîâàòü",
-            "Ïî äèñòàíöèè",
-            "Ïî äèñòàíöèè", "Ïî çäîðîâüþ", "Ïî ïîëþ çðåíèÿ"
+    private final MultiBoxSetting ignore = new MultiBoxSetting("Ð˜Ð³Ð½Ð¾Ñ€Ð¸Ñ€Ð¾Ð²Ð°Ñ‚ÑŒ",
+            new BooleanOption("Ð”Ñ€ÑƒÐ·ÐµÐ¹", true),
+            new BooleanOption("ÐÐµÐ²Ð¸Ð´Ð¸Ð¼Ñ‹Ñ…", false),
+            new BooleanOption("Ð“Ð¾Ð»Ñ‹Ñ…", false),
+            new BooleanOption("Ð‘Ð¾Ñ‚Ð¾Ð²", true)
     );
 
-    public final MultiBoxSetting settings = new MultiBoxSetting("Íàñòðîéêè",
-            new BooleanOption("Òîëüêî êðèòàìè", true),
-            new BooleanOption("Êîððåêöèÿ äâèæåíèÿ", true),
-            new BooleanOption("Íå áèòü ïðè èñïîëüçîâàíèè", false),
-            new BooleanOption("Îòæèìàòü ùèò", true),
-            new BooleanOption("Ëîìàòü ùèò", true)
+    private final ModeSetting sort = new ModeSetting("Ð¡Ð¾Ñ€Ñ‚Ð¸Ñ€Ð¾Ð²Ð°Ñ‚ÑŒ",
+            "ÐŸÐ¾ Ð´Ð¸ÑÑ‚Ð°Ð½Ñ†Ð¸Ð¸",
+            "ÐŸÐ¾ Ð´Ð¸ÑÑ‚Ð°Ð½Ñ†Ð¸Ð¸", "ÐŸÐ¾ Ð·Ð´Ð¾Ñ€Ð¾Ð²ÑŒÑŽ", "ÐŸÐ¾ Ð¿Ð¾Ð»ÑŽ Ð·Ñ€ÐµÐ½Ð¸Ñ"
     );
 
-    private final BooleanOption space = new BooleanOption("Êðèòû òîëüêî ñ ïðîáåëîì", false).setVisible(() -> settings.get(0));
-    private final BooleanOption silent = new BooleanOption("Ñàéëåíò êîððåêöèÿ", true).setVisible(() -> settings.get(1));
+    public final MultiBoxSetting settings = new MultiBoxSetting("ÐÐ°ÑÑ‚Ñ€Ð¾Ð¹ÐºÐ¸",
+            new BooleanOption("Ð¢Ð¾Ð»ÑŒÐºÐ¾ ÐºÑ€Ð¸Ñ‚Ð°Ð¼Ð¸", true),
+            new BooleanOption("ÐšÐ¾Ñ€Ñ€ÐµÐºÑ†Ð¸Ñ Ð´Ð²Ð¸Ð¶ÐµÐ½Ð¸Ñ", true),
+            new BooleanOption("ÐÐµ Ð±Ð¸Ñ‚ÑŒ Ð¿Ñ€Ð¸ Ð¸ÑÐ¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ð½Ð¸Ð¸", false),
+            new BooleanOption("ÐžÑ‚Ð¶Ð¸Ð¼Ð°Ñ‚ÑŒ Ñ‰Ð¸Ñ‚", true),
+            new BooleanOption("Ð›Ð¾Ð¼Ð°Ñ‚ÑŒ Ñ‰Ð¸Ñ‚", true)
+    );
+
+    private final BooleanOption space = new BooleanOption("ÐšÑ€Ð¸Ñ‚Ñ‹ Ñ‚Ð¾Ð»ÑŒÐºÐ¾ Ñ Ð¿Ñ€Ð¾Ð±ÐµÐ»Ð¾Ð¼", false).setVisible(() -> settings.get(0));
+    private final BooleanOption silent = new BooleanOption("Ð¡Ð°Ð¹Ð»ÐµÐ½Ñ‚ ÐºÐ¾Ñ€Ñ€ÐµÐºÑ†Ð¸Ñ", true).setVisible(() -> settings.get(1));
 
     public AuraNew() {
         addSettings(range, preRange, mode, targets, ignore, sort, settings, space, silent);
@@ -227,7 +227,7 @@ public class AuraNew extends Function {
             attackEntity(target);
             mc.player.connection.sendPacket(new CHeldItemChangePacket(mc.player.inventory.currentItem));
 
-            ClientUtil.sendMesage("ÁÐßÊ: " + mc.player.ticksExisted);
+            ClientUtil.sendMesage("Ð‘Ð Ð¯Ðš: " + mc.player.ticksExisted);
         }
 
         if (sprint) {
@@ -254,7 +254,7 @@ public class AuraNew extends Function {
 
         for (Entity entity : mc.world.getAllEntities()) {
             if (entity instanceof LivingEntity living && isValid(living) && getDistance(living) <= range.getValue().floatValue()
-                    + (mode.is("Îáû÷íàÿ") ? preRange.getValue().floatValue() : 0.0f)) {
+                    + (mode.is("ÐžÐ±Ñ‹Ñ‡Ð½Ð°Ñ") ? preRange.getValue().floatValue() : 0.0f)) {
                 if (ignore.get(0) && Managment.FRIEND_MANAGER.isFriend(living.getName().getString())) continue;
                 if (ignore.get(1) && living.isInvisible()) continue;
                 if (living.getHealth() < 0.01) continue;
@@ -328,7 +328,7 @@ public class AuraNew extends Function {
 
     private Vector3d getVector3d(LivingEntity me, LivingEntity to) {
 
-        // ÑÀÌÛÉ ÏÐÎÑÒÎÉ È ÏÐÀÂÈËÜÍÛÉ ÐÀÑ×ÅÒ ÎÒ ËÈÏÛ //
+        // Ð¡ÐÐœÐ«Ð™ ÐŸÐ ÐžÐ¡Ð¢ÐžÐ™ Ð˜ ÐŸÐ ÐÐ’Ð˜Ð›Ð¬ÐÐ«Ð™ Ð ÐÐ¡Ð§Ð•Ð¢ ÐžÐ¢ Ð›Ð˜ÐŸÐ« //
 
         double wHalf = to.getWidth() / 2;
 
@@ -343,7 +343,7 @@ public class AuraNew extends Function {
                 to.getPosZ() - me.getPosZ() + zExpand
         );
 
-        // ÊÀËÜÊÓËßÒÎÐ ÎÒ ÑÀËÀÒÈÊÀ //
+        // ÐšÐÐ›Ð¬ÐšÐ£Ð›Ð¯Ð¢ÐžÐ  ÐžÐ¢ Ð¡ÐÐ›ÐÐ¢Ð˜ÐšÐ //
 
 //        double yOffset = MathHelper.clamp(
 //                to.getEyeHeight() * (mc.player.getDistance(to) / (range.getValue().floatValue() + to.getWidth())),

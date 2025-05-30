@@ -71,34 +71,34 @@ public class AuraFunction extends Function {
 
     public Vector2f rotate = new Vector2f(0, 0);
 
-    private final ModeSetting rotationMode = new ModeSetting("Ìîä ðîòàöèè", "Îáû÷íàÿ", "Îáû÷íàÿ", "Ñíàïû");
+    private final ModeSetting rotationMode = new ModeSetting("ÐœÐ¾Ð´ Ñ€Ð¾Ñ‚Ð°Ñ†Ð¸Ð¸", "ÐžÐ±Ñ‹Ñ‡Ð½Ð°Ñ", "ÐžÐ±Ñ‹Ñ‡Ð½Ð°Ñ", "Ð¡Ð½Ð°Ð¿Ñ‹");
 
-    private final ModeSetting sortMode = new ModeSetting("Ñîðòèðîâàòü",
-            "Ïî âñåìó",
-            "Ïî âñåìó", "Ïî çäîðîâüþ", "Ïî äèñòàíöèè"
+    private final ModeSetting sortMode = new ModeSetting("Ð¡Ð¾Ñ€Ñ‚Ð¸Ñ€Ð¾Ð²Ð°Ñ‚ÑŒ",
+            "ÐŸÐ¾ Ð²ÑÐµÐ¼Ñƒ",
+            "ÐŸÐ¾ Ð²ÑÐµÐ¼Ñƒ", "ÐŸÐ¾ Ð·Ð´Ð¾Ñ€Ð¾Ð²ÑŒÑŽ", "ÐŸÐ¾ Ð´Ð¸ÑÑ‚Ð°Ð½Ñ†Ð¸Ð¸"
     );
 
-    private final MultiBoxSetting targets = new MultiBoxSetting("Öåëè",
-            new BooleanOption("Èãðîêè", true),
-            new BooleanOption("Äðóçüÿ", false),
-            new BooleanOption("Ãîëûå", true),
-            new BooleanOption("Ìîáû", false)
+    private final MultiBoxSetting targets = new MultiBoxSetting("Ð¦ÐµÐ»Ð¸",
+            new BooleanOption("Ð˜Ð³Ñ€Ð¾ÐºÐ¸", true),
+            new BooleanOption("Ð”Ñ€ÑƒÐ·ÑŒÑ", false),
+            new BooleanOption("Ð“Ð¾Ð»Ñ‹Ðµ", true),
+            new BooleanOption("ÐœÐ¾Ð±Ñ‹", false)
     );
 
-    private final SliderSetting distance = new SliderSetting("Äèñòàíöèÿ àòòàêè", 3.0f, 2.0f, 5.0f, 0.05f);
-    private final SliderSetting rotateDistance = new SliderSetting("Äèñòàíöèÿ ðîòàöèè", 1.5f, 0.0f, 3.0f, 0.05f).setVisible(() -> rotationMode.is("Îáû÷íàÿ"));
+    private final SliderSetting distance = new SliderSetting("Ð”Ð¸ÑÑ‚Ð°Ð½Ñ†Ð¸Ñ Ð°Ñ‚Ñ‚Ð°ÐºÐ¸", 3.0f, 2.0f, 5.0f, 0.05f);
+    private final SliderSetting rotateDistance = new SliderSetting("Ð”Ð¸ÑÑ‚Ð°Ð½Ñ†Ð¸Ñ Ñ€Ð¾Ñ‚Ð°Ñ†Ð¸Ð¸", 1.5f, 0.0f, 3.0f, 0.05f).setVisible(() -> rotationMode.is("ÐžÐ±Ñ‹Ñ‡Ð½Ð°Ñ"));
 
-    public final MultiBoxSetting settings = new MultiBoxSetting("Íàñòðîéêè",
-            new BooleanOption("Òîëüêî êðèòàìè", true),
-            new BooleanOption("Êîððåêöèÿ äâèæåíèÿ", true),
-            new BooleanOption("Îòæèìàòü ùèò", true),
-            new BooleanOption("Ëîìàòü ùèò", true),
-            new BooleanOption("Òàðãåò ÅÑÏ", true)
+    public final MultiBoxSetting settings = new MultiBoxSetting("ÐÐ°ÑÑ‚Ñ€Ð¾Ð¹ÐºÐ¸",
+            new BooleanOption("Ð¢Ð¾Ð»ÑŒÐºÐ¾ ÐºÑ€Ð¸Ñ‚Ð°Ð¼Ð¸", true),
+            new BooleanOption("ÐšÐ¾Ñ€Ñ€ÐµÐºÑ†Ð¸Ñ Ð´Ð²Ð¸Ð¶ÐµÐ½Ð¸Ñ", true),
+            new BooleanOption("ÐžÑ‚Ð¶Ð¸Ð¼Ð°Ñ‚ÑŒ Ñ‰Ð¸Ñ‚", true),
+            new BooleanOption("Ð›Ð¾Ð¼Ð°Ñ‚ÑŒ Ñ‰Ð¸Ñ‚", true),
+            new BooleanOption("Ð¢Ð°Ñ€Ð³ÐµÑ‚ Ð•Ð¡ÐŸ", true)
 
     );
-    private final BooleanOption onlySpaceCritical = new BooleanOption("Òîëüêî ñ ïðîáåëîì", false)
+    private final BooleanOption onlySpaceCritical = new BooleanOption("Ð¢Ð¾Ð»ÑŒÐºÐ¾ Ñ Ð¿Ñ€Ð¾Ð±ÐµÐ»Ð¾Ð¼", false)
             .setVisible(() -> settings.get(0));
-    private final BooleanOption silent = new BooleanOption("Ñàéëåíò êîððåêöèÿ", true).setVisible(() -> settings.get(1));
+    private final BooleanOption silent = new BooleanOption("Ð¡Ð°Ð¹Ð»ÐµÐ½Ñ‚ ÐºÐ¾Ñ€Ñ€ÐµÐºÑ†Ð¸Ñ", true).setVisible(() -> settings.get(1));
 
     int ticksUntilNextAttack;
     private boolean hasRotated;
@@ -273,7 +273,7 @@ public class AuraFunction extends Function {
         }
 
         boolean sprint = false;
-        if (CEntityActionPacket.lastUpdatedSprint && !mc.player.isInWater() && Managment.FUNCTION_MANAGER.clientSetting.sprint.is("Ïàêåòíûé")) {
+        if (CEntityActionPacket.lastUpdatedSprint && !mc.player.isInWater() && Managment.FUNCTION_MANAGER.clientSetting.sprint.is("ÐŸÐ°ÐºÐµÑ‚Ð½Ñ‹Ð¹")) {
             mc.player.connection.sendPacket(new CEntityActionPacket(mc.player, CEntityActionPacket.Action.STOP_SPRINTING));
             sprint = true;
         }
@@ -401,7 +401,7 @@ public class AuraFunction extends Function {
 
         if (targets.size() > 1) {
             switch (sortMode.get()) {
-                case "Ïî âñåìó" -> {
+                case "ÐŸÐ¾ Ð²ÑÐµÐ¼Ñƒ" -> {
                     targets.sort(Comparator.comparingDouble(target -> {
                         if (target instanceof PlayerEntity player) {
                             return -this.getEntityArmor(player);
@@ -420,10 +420,10 @@ public class AuraFunction extends Function {
                         return Double.compare(d2, d3);
                     }));
                 }
-                case "Ïî äèñòàíöèè" -> {
+                case "ÐŸÐ¾ Ð´Ð¸ÑÑ‚Ð°Ð½Ñ†Ð¸Ð¸" -> {
                     targets.sort(Comparator.comparingDouble(Managment.FUNCTION_MANAGER.auraFunction::getDistance).thenComparingDouble(this::getEntityHealth));
                 }
-                case "Ïî çäîðîâüþ" -> {
+                case "ÐŸÐ¾ Ð·Ð´Ð¾Ñ€Ð¾Ð²ÑŒÑŽ" -> {
                     targets.sort(Comparator.comparingDouble(this::getEntityHealth).thenComparingDouble(mc.player::getDistance));
                 }
             }
@@ -451,7 +451,7 @@ public class AuraFunction extends Function {
             return false;
 
         return getDistance(base) <= distance.getValue().floatValue()
-                + (rotationMode.is("Îáû÷íàÿ") ? rotateDistance.getValue().floatValue() : 0.0f);
+                + (rotationMode.is("ÐžÐ±Ñ‹Ñ‡Ð½Ð°Ñ") ? rotateDistance.getValue().floatValue() : 0.0f);
     }
 
     private double getDistance(LivingEntity entity) {
