@@ -1,0 +1,96 @@
+---- Minecraft Crash Report ----
+// You should try our sister game, Minceraft!
+
+Time: 30.05.2025, 20:53
+Description: Ticking entity
+
+java.lang.NullPointerException: Cannot invoke "net.minecraft.entity.LivingEntity.getName()" because "this.target" is null
+	at wtf.expensive.modules.impl.combat.AuraFunction.onEvent(AuraFunction.java:134)
+	at wtf.expensive.events.EventManager.callEvent(EventManager.java:40)
+	at wtf.expensive.events.EventManager.call(EventManager.java:26)
+	at net.minecraft.client.entity.player.ClientPlayerEntity.tick(ClientPlayerEntity.java:242)
+	at net.minecraft.client.world.ClientWorld.updateEntity(ClientWorld.java:236)
+	at net.minecraft.world.World.guardEntityTick(World.java:672)
+	at net.minecraft.client.world.ClientWorld.tickEntities(ClientWorld.java:187)
+	at net.minecraft.client.Minecraft.runTick(Minecraft.java:1613)
+	at net.minecraft.client.Minecraft.runGameLoop(Minecraft.java:1018)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:643)
+	at net.minecraft.client.main.Main.main(Main.java:207)
+	at Start.main(Start.java:12)
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Thread: Render thread
+Stacktrace:
+	at wtf.expensive.modules.impl.combat.AuraFunction.onEvent(AuraFunction.java:134)
+	at wtf.expensive.events.EventManager.callEvent(EventManager.java:40)
+	at wtf.expensive.events.EventManager.call(EventManager.java:26)
+	at net.minecraft.client.entity.player.ClientPlayerEntity.tick(ClientPlayerEntity.java:242)
+	at net.minecraft.client.world.ClientWorld.updateEntity(ClientWorld.java:236)
+
+-- Entity being ticked --
+Details:
+	Entity Type: minecraft:player (net.minecraft.client.entity.player.ClientPlayerEntity)
+	Entity ID: 545687
+	Entity Name: LDevX4454a410
+	Entity's Exact location: 2.02, 100.00, -0.89
+	Entity's Block location: World: (2,100,-1), Chunk: (at 2,6,15 in 0,-1; contains blocks 0,0,-16 to 15,255,-1), Region: (0,-1; contains chunks 0,-32 to 31,-1, blocks 0,0,-512 to 511,255,-1)
+	Entity's Momentum: 0.07, -0.08, -0.07
+	Entity's Passengers: []
+	Entity's Vehicle: ~~ERROR~~ NullPointerException: Cannot invoke "net.minecraft.entity.Entity.toString()" because the return value of "net.minecraft.entity.Entity.getRidingEntity()" is null
+Stacktrace:
+	at net.minecraft.world.World.guardEntityTick(World.java:672)
+	at net.minecraft.client.world.ClientWorld.tickEntities(ClientWorld.java:187)
+
+-- Affected level --
+Details:
+	All players: 19 total; [ClientPlayerEntity['LDevX4454a410'/545687, l='ClientLevel', x=2.02, y=100.00, z=-0.89], RemoteClientPlayerEntity['assemblyeditor'/544833, l='ClientLevel', x=-27.99, y=99.70, z=-3.41], RemoteClientPlayerEntity['grief'/36, l='ClientLevel', x=-3.48, y=101.00, z=-23.46], RemoteClientPlayerEntity['nicelol'/543704, l='ClientLevel', x=-7.61, y=99.00, z=-3.88], RemoteClientPlayerEntity['UzaFallin147'/544334, l='ClientLevel', x=-1.97, y=100.00, z=-2.23], RemoteClientPlayerEntity['Alarson'/543614, l='ClientLevel', x=23.57, y=100.18, z=-24.49], RemoteClientPlayerEntity['anarchy'/33, l='ClientLevel', x=4.48, y=101.00, z=-23.46], RemoteClientPlayerEntity['orefasa'/543345, l='ClientLevel', x=0.50, y=100.00, z=0.50], RemoteClientPlayerEntity['Jakambo'/542726, l='ClientLevel', x=0.50, y=100.00, z=0.50], RemoteClientPlayerEntity['MVP6sct'/543435, l='ClientLevel', x=0.50, y=100.00, z=0.50], RemoteClientPlayerEntity['h1k1morka1'/542220, l='ClientLevel', x=0.50, y=100.00, z=0.50], RemoteClientPlayerEntity['gfjtruikftyki'/541905, l='ClientLevel', x=0.50, y=100.00, z=0.50], RemoteClientPlayerEntity['MrNekro226'/545065, l='ClientLevel', x=0.50, y=100.00, z=0.50], RemoteClientPlayerEntity['Galean_kapa'/542219, l='ClientLevel', x=0.50, y=100.00, z=0.50], RemoteClientPlayerEntity['teri_19'/545012, l='ClientLevel', x=0.50, y=100.00, z=0.50], RemoteClientPlayerEntity['Givemedr'/545551, l='ClientLevel', x=0.50, y=100.00, z=0.50], RemoteClientPlayerEntity['228kiskader1228'/545686, l='ClientLevel', x=0.50, y=100.00, z=0.50], RemoteClientPlayerEntity['KaRtOgRaF990'/545776, l='ClientLevel', x=0.50, y=100.00, z=0.50], RemoteClientPlayerEntity['Hengusel13'/545777, l='ClientLevel', x=0.50, y=100.00, z=0.50]]
+	Chunk stats: Client Chunk Cache: 361, 225
+	Level dimension: minecraft:overworld
+	Level spawn location: World: (0,65,0), Chunk: (at 0,4,0 in 0,0; contains blocks 0,0,0 to 15,255,15), Region: (0,0; contains chunks 0,0 to 31,31, blocks 0,0,0 to 511,255,511)
+	Level time: 78303 game time, 1 day time
+	Server brand: BotFilter (git:BungeeCord-Bootstrap:1.21-R0.3-SNAPSHOT:daa52ba:unknown) <- Paper
+	Server type: Non-integrated multiplayer server
+Stacktrace:
+	at net.minecraft.client.world.ClientWorld.fillCrashReport(ClientWorld.java:536)
+	at net.minecraft.client.Minecraft.addGraphicsAndWorldToCrashReport(Minecraft.java:2313)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:659)
+	at net.minecraft.client.main.Main.main(Main.java:207)
+	at Start.main(Start.java:12)
+
+-- System Details --
+Details:
+	Minecraft Version: 1.16.5
+	Minecraft Version ID: 1.16.5
+	Operating System: Windows 10 (amd64) version 10.0
+	Java Version: 17.0.14, Amazon.com Inc.
+	Java VM Version: OpenJDK 64-Bit Server VM (mixed mode, sharing), Amazon.com Inc.
+	Memory: 139745920 bytes (133 MB) / 503316480 bytes (480 MB) up to 8552185856 bytes (8156 MB)
+	CPUs: 28
+	JVM Flags: 0 total; 
+	Launched Version: mcp
+	Backend library: LWJGL version 3.2.2 build 10
+	Backend API: NVIDIA GeForce GTX 1060 6GB/PCIe/SSE2 GL version 4.6.0 NVIDIA 572.83, NVIDIA Corporation
+	GL Caps: Using framebuffer using OpenGL 3.0
+	Using VBOs: Yes
+	Is Modded: Definitely; Client brand changed to 'vanilla/modified'
+	Type: Client (map_client.txt)
+	Graphics mode: fancy
+	Resource Packs: 
+	Current Language: English (US)
+	CPU: 28x Intel(R) Xeon(R) CPU E5-2680 v4 @ 2.40GHz
+	OptiFine Version: OptiFine_1.16.5_HD_U_G8
+	OptiFine Build: ~~NULL~~
+	Render Distance Chunks: 8
+	Mipmaps: 4
+	Anisotropic Filtering: 1
+	Antialiasing: 0
+	Multitexture: false
+	Shaders: null
+	OpenGlVersion: 4.6.0 NVIDIA 572.83
+	OpenGlRenderer: NVIDIA GeForce GTX 1060 6GB/PCIe/SSE2
+	OpenGlVendor: NVIDIA Corporation
+	CpuCount: 28

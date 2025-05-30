@@ -9,8 +9,8 @@ import wtf.expensive.modules.settings.imp.ModeSetting;
 
 @FunctionAnnotation(name = "ClientSettings",type = Type.Util)
 public class ClientSetting extends Function {
-    public ModeSetting sprint = new ModeSetting("Р РµР¶РёРј СЃРїСЂРёРЅС‚Р°","РџР°РєРµС‚РЅС‹Р№","РџР°РєРµС‚РЅС‹Р№","Р›РµРіРёС‚");
-    public BooleanOption fixinteract = new BooleanOption("РСЃРїСЂР°РІР»СЏС‚СЊ РїР°РєРµС‚С‹",false);
+    public ModeSetting sprint = new ModeSetting("Режим спринта","Пакетный","Пакетный","Легит");
+    public BooleanOption fixinteract = new BooleanOption("Исправлять пакеты",false);
     public ClientSetting() {
         addSettings(sprint, fixinteract);
     }

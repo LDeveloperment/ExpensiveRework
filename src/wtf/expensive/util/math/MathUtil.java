@@ -20,6 +20,9 @@ public class MathUtil implements IMinecraft {
         bd = bd.setScale(times, RoundingMode.HALF_UP);
         return bd;
     }
+    public static float random(float min, float max) {
+        return (float) (Math.random() * (max - min) + min);
+    }
 
     public static double round(double num, double increment) {
         double v = (double) Math.round(num / increment) * increment;

@@ -42,6 +42,7 @@ import wtf.expensive.modules.settings.imp.BooleanOption;
 import wtf.expensive.modules.settings.imp.ModeSetting;
 import wtf.expensive.modules.settings.imp.MultiBoxSetting;
 import wtf.expensive.modules.settings.imp.SliderSetting;
+import wtf.expensive.util.ClientUtil;
 import wtf.expensive.util.math.AuraUtil;
 import wtf.expensive.util.math.GCDUtil;
 import wtf.expensive.util.math.MathUtil;
@@ -71,34 +72,34 @@ public class AuraFunction extends Function {
 
     public Vector2f rotate = new Vector2f(0, 0);
 
-    private final ModeSetting rotationMode = new ModeSetting("ÐœÐ¾Ð´ Ñ€Ð¾Ñ‚Ð°Ñ†Ð¸Ð¸", "ÐžÐ±Ñ‹Ñ‡Ð½Ð°Ñ", "ÐžÐ±Ñ‹Ñ‡Ð½Ð°Ñ", "Ð¡Ð½Ð°Ð¿Ñ‹");
+    private final ModeSetting rotationMode = new ModeSetting("Ìîä ðîòàöèè", "Îáû÷íàÿ", "Îáû÷íàÿ", "Ñíàïû","Ìàòðèêñ","Ïëàâíàÿ");
 
-    private final ModeSetting sortMode = new ModeSetting("Ð¡Ð¾Ñ€Ñ‚Ð¸Ñ€Ð¾Ð²Ð°Ñ‚ÑŒ",
-            "ÐŸÐ¾ Ð²ÑÐµÐ¼Ñƒ",
-            "ÐŸÐ¾ Ð²ÑÐµÐ¼Ñƒ", "ÐŸÐ¾ Ð·Ð´Ð¾Ñ€Ð¾Ð²ÑŒÑŽ", "ÐŸÐ¾ Ð´Ð¸ÑÑ‚Ð°Ð½Ñ†Ð¸Ð¸"
+    private final ModeSetting sortMode = new ModeSetting("Ñîðòèðîâàòü",
+            "Ïî âñåìó",
+            "Ïî âñåìó", "Ïî çäîðîâüþ", "Ïî äèñòàíöèè"
     );
 
-    private final MultiBoxSetting targets = new MultiBoxSetting("Ð¦ÐµÐ»Ð¸",
-            new BooleanOption("Ð˜Ð³Ñ€Ð¾ÐºÐ¸", true),
-            new BooleanOption("Ð”Ñ€ÑƒÐ·ÑŒÑ", false),
-            new BooleanOption("Ð“Ð¾Ð»Ñ‹Ðµ", true),
-            new BooleanOption("ÐœÐ¾Ð±Ñ‹", false)
+    private final MultiBoxSetting targets = new MultiBoxSetting("Öåëè",
+            new BooleanOption("Èãðîêè", true),
+            new BooleanOption("Äðóçüÿ", false),
+            new BooleanOption("Ãîëûå", true),
+            new BooleanOption("Ìîáû", false)
     );
 
-    private final SliderSetting distance = new SliderSetting("Ð”Ð¸ÑÑ‚Ð°Ð½Ñ†Ð¸Ñ Ð°Ñ‚Ñ‚Ð°ÐºÐ¸", 3.0f, 2.0f, 5.0f, 0.05f);
-    private final SliderSetting rotateDistance = new SliderSetting("Ð”Ð¸ÑÑ‚Ð°Ð½Ñ†Ð¸Ñ Ñ€Ð¾Ñ‚Ð°Ñ†Ð¸Ð¸", 1.5f, 0.0f, 3.0f, 0.05f).setVisible(() -> rotationMode.is("ÐžÐ±Ñ‹Ñ‡Ð½Ð°Ñ"));
+    private final SliderSetting distance = new SliderSetting("Äèñòàíöèÿ àòòàêè", 3.0f, 2.0f, 5.0f, 0.05f);
+    private final SliderSetting rotateDistance = new SliderSetting("Äèñòàíöèÿ ðîòàöèè", 1.5f, 0.0f, 3.0f, 0.05f).setVisible(() -> rotationMode.is("Îáû÷íàÿ"));
 
-    public final MultiBoxSetting settings = new MultiBoxSetting("ÐÐ°ÑÑ‚Ñ€Ð¾Ð¹ÐºÐ¸",
-            new BooleanOption("Ð¢Ð¾Ð»ÑŒÐºÐ¾ ÐºÑ€Ð¸Ñ‚Ð°Ð¼Ð¸", true),
-            new BooleanOption("ÐšÐ¾Ñ€Ñ€ÐµÐºÑ†Ð¸Ñ Ð´Ð²Ð¸Ð¶ÐµÐ½Ð¸Ñ", true),
-            new BooleanOption("ÐžÑ‚Ð¶Ð¸Ð¼Ð°Ñ‚ÑŒ Ñ‰Ð¸Ñ‚", true),
-            new BooleanOption("Ð›Ð¾Ð¼Ð°Ñ‚ÑŒ Ñ‰Ð¸Ñ‚", true),
-            new BooleanOption("Ð¢Ð°Ñ€Ð³ÐµÑ‚ Ð•Ð¡ÐŸ", true)
+    public final MultiBoxSetting settings = new MultiBoxSetting("Íàñòðîéêè",
+            new BooleanOption("Òîëüêî êðèòàìè", true),
+            new BooleanOption("Êîððåêöèÿ äâèæåíèÿ", true),
+            new BooleanOption("Îòæèìàòü ùèò", true),
+            new BooleanOption("Ëîìàòü ùèò", true),
+            new BooleanOption("Òàðãåò ÅÑÏ", true)
 
     );
-    private final BooleanOption onlySpaceCritical = new BooleanOption("Ð¢Ð¾Ð»ÑŒÐºÐ¾ Ñ Ð¿Ñ€Ð¾Ð±ÐµÐ»Ð¾Ð¼", false)
+    private final BooleanOption onlySpaceCritical = new BooleanOption("Òîëüêî ñ ïðîáåëîì", false)
             .setVisible(() -> settings.get(0));
-    private final BooleanOption silent = new BooleanOption("Ð¡Ð°Ð¹Ð»ÐµÐ½Ñ‚ ÐºÐ¾Ñ€Ñ€ÐµÐºÑ†Ð¸Ñ", true).setVisible(() -> settings.get(1));
+    private final BooleanOption silent = new BooleanOption("Ñàéëåíò êîððåêöèÿ", true).setVisible(() -> settings.get(1));
 
     int ticksUntilNextAttack;
     private boolean hasRotated;
@@ -130,12 +131,15 @@ public class AuraFunction extends Function {
             if (!(target != null && isValidTarget(target))) {
                 target = findTarget();
             }
+
+
             if (target == null) {
                 cpsLimit = System.currentTimeMillis();
                 rotate = new Vector2f(mc.player.rotationYaw, mc.player.rotationPitch);
                 return;
             }
 
+            ClientUtil.sendMesage("target:" + target.getName());
             attackAndRotateOnEntity(target);
         }
         if (event instanceof EventMotion motionEvent) {
@@ -241,8 +245,14 @@ public class AuraFunction extends Function {
 
     private void attackAndRotateOnEntity(LivingEntity target) {
         hasRotated = false;
-        switch (rotationMode.getIndex()) {
-            case 0 -> {
+        if (shouldAttack(target) && RayTraceUtil.getMouseOver(target, rotate.x, rotate.y, distance.getValue().floatValue()) == target
+                && !Managment.FUNCTION_MANAGER.autoPotionFunction.isActivePotion) {
+            attackTarget(target);
+        }
+        if (!hasRotated)
+            setRotation(target, false);
+        /*switch (rotationMode.get()) {
+            case "Îáû÷íàÿ" -> {
                 hasRotated = false;
                 if (shouldAttack(target) && RayTraceUtil.getMouseOver(target, rotate.x, rotate.y, distance.getValue().floatValue()) == target
                         && !Managment.FUNCTION_MANAGER.autoPotionFunction.isActivePotion) {
@@ -251,7 +261,7 @@ public class AuraFunction extends Function {
                 if (!hasRotated)
                     setRotation(target, false);
             }
-            case 1 -> {
+            case "Ñíàïû" -> {
                 if (shouldAttack(target) && !Managment.FUNCTION_MANAGER.autoPotionFunction.isActivePotion) {
                     attackTarget(target);
                     ticksUntilNextAttack = 2;
@@ -264,7 +274,25 @@ public class AuraFunction extends Function {
                     rotate.y = mc.player.rotationPitch;
                 }
             }
-        }
+            case "Ìàòðèêñ" -> {
+                hasRotated = false;
+                if (shouldAttack(target) && RayTraceUtil.getMouseOver(target, rotate.x, rotate.y, distance.getValue().floatValue()) == target
+                        && !Managment.FUNCTION_MANAGER.autoPotionFunction.isActivePotion) {
+                    attackTarget(target);
+                }
+                if (!hasRotated)
+                    setRotation(target, false);
+            }
+            case "Ïëàâíàÿ" -> {
+                hasRotated = false;
+                if (shouldAttack(target) && RayTraceUtil.getMouseOver(target, rotate.x, rotate.y, distance.getValue().floatValue()) == target
+                        && !Managment.FUNCTION_MANAGER.autoPotionFunction.isActivePotion) {
+                    attackTarget(target);
+                }
+                if (!hasRotated)
+                    setRotation(target, false);
+            }
+        }*/
     }
 
     private void attackTarget(final LivingEntity targetEntity) {
@@ -273,7 +301,7 @@ public class AuraFunction extends Function {
         }
 
         boolean sprint = false;
-        if (CEntityActionPacket.lastUpdatedSprint && !mc.player.isInWater() && Managment.FUNCTION_MANAGER.clientSetting.sprint.is("ÐŸÐ°ÐºÐµÑ‚Ð½Ñ‹Ð¹")) {
+        if (CEntityActionPacket.lastUpdatedSprint && !mc.player.isInWater() && Managment.FUNCTION_MANAGER.clientSetting.sprint.is("Ïàêåòíûé")) {
             mc.player.connection.sendPacket(new CEntityActionPacket(mc.player, CEntityActionPacket.Action.STOP_SPRINTING));
             sprint = true;
         }
@@ -349,15 +377,54 @@ public class AuraFunction extends Function {
         float deltaYaw = MathHelper.wrapDegrees(calculateDelta(rotations[0], this.rotate.x));
         float deltaPitch = calculateDelta(rotations[1], this.rotate.y);
 
-        float limitedYaw = min(max(abs(deltaYaw), 1.0F), 180.0F);
-        float limitedPitch = (float) min(max(abs(deltaPitch), 1.0F), 15.0F);
+        float finalYaw = 0;
+        float finalPitch = 0;
+        switch (rotationMode.get()) {
+            case "Îáû÷íàÿ" -> {
+                float limitedYaw = min(max(abs(deltaYaw), 1.0F), 180.0F);
+                float limitedPitch = (float) min(max(abs(deltaPitch), 1.0F), 15.0F);
 
-        float finalYaw = this.rotate.x + (deltaYaw > 0.0f ? limitedYaw : -limitedYaw) + ThreadLocalRandom.current().nextFloat(-1, 1);
-        float finalPitch = MathHelper.clamp(this.rotate.y + (deltaPitch > 0.0f ? limitedPitch : -limitedPitch) + ThreadLocalRandom.current().nextFloat(-1, 1), -89.0f, 89.0f);
+                finalYaw = this.rotate.x + (deltaYaw > 0.0f ? limitedYaw : -limitedYaw) + ThreadLocalRandom.current().nextFloat(-1, 1);
+                finalPitch = MathHelper.clamp(this.rotate.y + (deltaPitch > 0.0f ? limitedPitch : -limitedPitch) + ThreadLocalRandom.current().nextFloat(-1, 1), -89.0f, 89.0f);
 
-        float gcd = GCDUtil.getGCDValue();
-        finalYaw = (float) ((double) finalYaw - (double) (finalYaw - this.rotate.x) % gcd);
-        finalPitch = (float) ((double) finalPitch - (double) (finalPitch - rotate.y) % gcd);
+                float gcd = GCDUtil.getGCDValue();
+                finalYaw = (float) ((double) finalYaw - (double) (finalYaw - this.rotate.x) % gcd);
+                finalPitch = (float) ((double) finalPitch - (double) (finalPitch - rotate.y) % gcd);
+            }
+          case "Ñíàïû" -> {
+              float limitedYaw = min(max(abs(deltaYaw), 1.0F), 180.0F);
+              float limitedPitch = (float) min(max(abs(deltaPitch), 1.0F), 15.0F);
+
+              finalYaw = this.rotate.x + (deltaYaw > 0.0f ? limitedYaw : -limitedYaw) + ThreadLocalRandom.current().nextFloat(-1, 1);
+              finalPitch = MathHelper.clamp(this.rotate.y + (deltaPitch > 0.0f ? limitedPitch : -limitedPitch) + ThreadLocalRandom.current().nextFloat(-1, 1), -89.0f, 89.0f);
+
+              float gcd = GCDUtil.getGCDValue();
+              finalYaw = (float) ((double) finalYaw - (double) (finalYaw - this.rotate.x) % gcd);
+              finalPitch = (float) ((double) finalPitch - (double) (finalPitch - rotate.y) % gcd);
+          }
+          case "Ìàòðèêñ" -> {
+              float limitedYaw = min(max(abs(deltaYaw), 1.0F), MathUtil.random(80,200));
+              float limitedPitch = (float) min(max(abs(deltaPitch), 1.0F), MathUtil.random(80,200));
+
+              finalYaw = this.rotate.x + (deltaYaw > 0.0f ? limitedYaw : -limitedYaw) + ThreadLocalRandom.current().nextFloat(-1, 1);
+              finalPitch = MathHelper.clamp(this.rotate.y + (deltaPitch > 0.0f ? limitedPitch : -limitedPitch) + ThreadLocalRandom.current().nextFloat(-1, 1), -89.0f, 89.0f);
+
+              float gcd = GCDUtil.getGCDValue();
+              finalYaw = (float) ((double) finalYaw - (double) (finalYaw - this.rotate.x) % gcd);
+              finalPitch = (float) ((double) finalPitch - (double) (finalPitch - rotate.y) % gcd);
+          }
+          case "Ïëàâíàÿ" -> {
+              float limitedYaw = min(max(abs(deltaYaw), 1.0F), MathUtil.random(15,20));
+              float limitedPitch = (float) min(max(abs(deltaPitch), 1.0F), MathUtil.random(2,20));
+
+              finalYaw = this.rotate.x + (deltaYaw > 0.0f ? limitedYaw : -limitedYaw) + ThreadLocalRandom.current().nextFloat(-1, 1);
+              finalPitch = MathHelper.clamp(this.rotate.y + (deltaPitch > 0.0f ? limitedPitch : -limitedPitch) + ThreadLocalRandom.current().nextFloat(-1, 1), -89.0f, 89.0f);
+
+              float gcd = GCDUtil.getGCDValue();
+              finalYaw = (float) ((double) finalYaw - (double) (finalYaw - this.rotate.x) % gcd);
+              finalPitch = (float) ((double) finalPitch - (double) (finalPitch - rotate.y) % gcd);
+          }
+        }
 
         this.rotate.x = finalYaw;
         this.rotate.y = finalPitch;
@@ -401,7 +468,7 @@ public class AuraFunction extends Function {
 
         if (targets.size() > 1) {
             switch (sortMode.get()) {
-                case "ÐŸÐ¾ Ð²ÑÐµÐ¼Ñƒ" -> {
+                case "Ïî âñåìó" -> {
                     targets.sort(Comparator.comparingDouble(target -> {
                         if (target instanceof PlayerEntity player) {
                             return -this.getEntityArmor(player);
@@ -420,10 +487,10 @@ public class AuraFunction extends Function {
                         return Double.compare(d2, d3);
                     }));
                 }
-                case "ÐŸÐ¾ Ð´Ð¸ÑÑ‚Ð°Ð½Ñ†Ð¸Ð¸" -> {
+                case "Ïî äèñòàíöèè" -> {
                     targets.sort(Comparator.comparingDouble(Managment.FUNCTION_MANAGER.auraFunction::getDistance).thenComparingDouble(this::getEntityHealth));
                 }
-                case "ÐŸÐ¾ Ð·Ð´Ð¾Ñ€Ð¾Ð²ÑŒÑŽ" -> {
+                case "Ïî çäîðîâüþ" -> {
                     targets.sort(Comparator.comparingDouble(this::getEntityHealth).thenComparingDouble(mc.player::getDistance));
                 }
             }
@@ -451,7 +518,7 @@ public class AuraFunction extends Function {
             return false;
 
         return getDistance(base) <= distance.getValue().floatValue()
-                + (rotationMode.is("ÐžÐ±Ñ‹Ñ‡Ð½Ð°Ñ") ? rotateDistance.getValue().floatValue() : 0.0f);
+                + (rotationMode.is("Îáû÷íàÿ") ? rotateDistance.getValue().floatValue() : 0.0f);
     }
 
     private double getDistance(LivingEntity entity) {

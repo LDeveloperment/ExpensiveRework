@@ -54,7 +54,7 @@ import wtf.expensive.events.impl.game.EventDestroyBlock;
 import wtf.expensive.events.impl.player.EventWindowClick;
 import wtf.expensive.managment.Managment;
 import wtf.expensive.modules.impl.combat.AuraFunction;
-import wtf.expensive.modules.impl.combat.AuraNew;
+
 import wtf.expensive.modules.impl.player.NoInteractFunction;
 import wtf.expensive.util.ClientUtil;
 
